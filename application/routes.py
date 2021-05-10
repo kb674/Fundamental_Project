@@ -1,48 +1,48 @@
 from application import app, db
-from application.models import Task_table
+from application.models import Task_table, Tricks
 
 @app.route('/')
 
 @app.route('/home')
 def home():
-    all_tasks = Task_table.query.all()
+    all_tricks = Tricks.query.all()
     output = ""
-    for each_task in all_tasks:
-        output += str(each_task.task_id) + "/ / / "+ each_task.task_name + " - " + each_task.description + "   /// " + str(each_task.task_status) + "<br>"
+    for each_trick in all_tricks:
+        output += str(each_trick.trick_id) + "/   / "+ each_trick.name + " - " + str(each_trick.longboard) + "<br>"
     return output
 
 @app.route('/create')
 def create():
-    task_one = Task_table(task_name = 'Task one', description = "Do task one")
-    db.session.add(task_one)
+    new_trick = Tricks(name = 'cross step')
+    db.session.add(new_trick)
     db.session.commit()
-    return f"A task has been added"
+    return f"A new trick has been added"
 
 
-@app.route('/complete/<int:id>')
-def complete(id):
-    task_to_change = Task_table.query.filter_by(task_id = id).first()
-    task_to_change.task_status = True
+@app.route('/longboard/<int:id>')
+def longboard(id):
+    trick_change = Tricks.query.filter_by(trick_id = id).first()
+    trick_change.longboard = True
     db.session.commit()
-    return f"Task {id} has been completed!"
+    return f"Trick {id} has been categorised as a longboard trick!"
 
-@app.route('/incomplete/<int:id>')
-def incomplete(id):
-    task_to_change = Task_table.query.filter_by(task_id = id).first()
-    task_to_change.task_status = False
+@app.route('/not_longboard/<int:id>')
+def not_longboard(id):
+    trick_to_change = Tricks.query.filter_by(trick_id = id).first()
+    trick_to_change.longboard = False
     db.session.commit()
-    return f"Task {id} is set as incomplete"
+    return f"Trick {id} has been removed from the longboard list."
 
-@app.route('/update/<new_description>')
-def update(new_description):
-    task_to_change_description = Task_table.query.order_by(Task_table.task_id.desc()).first()
-    task_to_change_description.description = new_description
+@app.route('/update/<new_name>')
+def update(new_name):
+    trick_change = Tricks.query.order_by(Tricks.trick_id.desc()).first()
+    trick_change.name = new_name
     db.session.commit()
-    return f"You have changed the description of the most recent task"
+    return f"You have changed the name of the most recent trick"
 
 @app.route('/delete/<int:id>')
 def delete(id):
-    task_to_delete = Task_table.query.filter_by(task_id=id).first()
-    db.session.delete(task_to_delete)
+    trick_to_delete = Tricks.query.filter_by(trick_id=id).first()
+    db.session.delete(trick_to_delete)
     db.session.commit()
-    return f"Task {id} has been deleted"
+    return f"Trick {id} has been deleted"

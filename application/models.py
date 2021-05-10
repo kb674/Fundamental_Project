@@ -7,3 +7,10 @@ class Task_table(db.Model):
     description = db.Column(db.String(50), nullable = False)
     task_status = db.Column(db.Boolean, nullable = False, default = False)
     date_created = db.Column(db.DateTime, nullable = False, default = datetime.utcnow)
+
+class Tricks(db.Model):
+    trick_id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String(20), nullable = False)
+    longboard = db.Column(db.Boolean, nullable = False, default = False)
+
+    
