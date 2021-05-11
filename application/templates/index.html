@@ -1,14 +1,12 @@
 {% extends 'layout.html' %}
 {% block body %}
 
-<h2>Owners and Tricks</h2>
+<h2>Boarders and Tricks</h2>
 {% for a_boarder in all_boarders %}
     <h3>{{ a_boarder.boarder_name }} {{ a_boarder.border_id }}</h3>
-    <h4>Tricks</h4>
+    
     {% for a_trick in a_boarder.tricks %}
-        id: {{ a_trick.trick_id }}
-        <br>
-        name: {{ a_trick.trick_name }}
+        {{ a_trick.trick_name }}
         <br>
         <br>
     {% endfor %}

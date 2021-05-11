@@ -10,6 +10,14 @@ def home():
     output = ""
     return render_template("index.html", title="Home", all_boarders=all_boarders)
 
+@app.route('/boarder_view')
+def boarder_view():
+    all_boarders = Boarders.query.all()
+    output = ""
+    for each_boarder in all_boarders:
+        output += str(each_boarder.boarder_id) + " |    "+ each_boarder.boarder_name + "<br>"
+    return output
+
 @app.route('/create')
 def create():
     new_boarder = Boarders(boarder_name = 'skate_master_5000')
@@ -32,8 +40,8 @@ def delete(id):
     return f"Boarder {id} has been deleted"
 
 
-@app.route('/trick_home')
-def trick_home():
+@app.route('/trick_view')
+def trick_view():
     all_tricks = Tricks.query.all()
     output = ""
     for each_trick in all_tricks:
@@ -65,6 +73,6 @@ def trick_delete(id):
 @app.route('/assign_trick_to_owner/<int:id>')
 def assign_trick_to_owner(id):
     trick_assign = Tricks.query.filter_by(trick_id=id).first()
-    trick_assign.fk_boarder_id = 1
+    trick_assign.fk_boarder_id = 2
     db.session.commit()
     return f"Trick {id} has been assigned to boarder {trick_assign.fk_boarder_id}"
