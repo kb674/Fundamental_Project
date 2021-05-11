@@ -12,6 +12,10 @@
         <form action="{{ url_for('trick_update', id =a_trick.trick_id) }}">
             <input type=submit value="Change">
         </form>
+        
+        <form action="{{ url_for('trick_delete', id=a_trick.trick_id) }}">
+            <input type=submit value="Delete">
+        </form>
         <br>
     {% endfor %}
     <br>

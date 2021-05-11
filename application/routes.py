@@ -80,12 +80,12 @@ def trick_update(id):
     return render_template("update_trick.html", form=form, title="Update trick", trick=trick_name_change)
 
 
-@app.route('/trick_delete/<int:id>')
+@app.route('/trick_delete/<int:id>', methods=["GET", "POST"])
 def trick_delete(id):
     trick_delete = Tricks.query.filter_by(trick_id=id).first()
     db.session.delete(trick_delete)
     db.session.commit()
-    return f"Trick {id} has been deleted"
+    return redirect(url_for("home"))
 
 
 @app.route('/assign_trick_to_owner/<int:id>')
