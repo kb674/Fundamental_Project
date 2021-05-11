@@ -1,5 +1,6 @@
 from application import app, db
 from application.models import Task_table, Boarders, Tricks
+from flask import render_template
 
 @app.route('/')
 
@@ -7,9 +8,7 @@ from application.models import Task_table, Boarders, Tricks
 def home():
     all_boarders = Boarders.query.all()
     output = ""
-    for each_boarder in all_boarders:
-        output += str(each_boarder.boarder_id) + " |    "+ each_boarder.boarder_name + "<br>"
-    return output
+    return render_template("index.html", title="Home", all_boarders=all_boarders)
 
 @app.route('/create')
 def create():

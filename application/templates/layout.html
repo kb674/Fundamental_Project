@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <title>To do List - {{ title }}</title>
+    </head>
+    <body>
+        <h1>To do List - {{ title }}</h1>  
+        <a href="{{ url_for('home') }}">Home</a>  
+        <a href="{{ url_for('create') }}">Add a boarder</a>   
+        <a href="{{ url_for('trick_create') }}">Add a trick</a>
+        {% block body %}
+        {% endblock body %}
+    </body>
+</html>
