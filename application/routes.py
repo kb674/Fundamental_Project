@@ -1,6 +1,6 @@
 from application import app, db
 from application.models import Task_table, Boarders, Tricks
-from application.forms import TaskForm
+from application.forms import TaskForm, TrickForm
 from flask import render_template, request, redirect, url_for
 
 @app.route('/')
@@ -46,6 +46,8 @@ def delete(id):
     return f"Boarder {id} has been deleted"
 
 
+
+
 @app.route('/trick_view')
 def trick_view():
     all_tricks = Tricks.query.all()
@@ -55,12 +57,17 @@ def trick_view():
     return output
 
 
-@app.route('/trick_create')
+@app.route('/trick_create', methods=["GET", "POST"])
 def trick_create():
-    new_trick = Tricks(trick_name = 'shuvit')
-    db.session.add(new_trick)
-    db.session.commit()
-    return f"A new trick has been added"
+    form = TrickForm()
+    if request.method == "POST":
+        if form.validate_on_submit():
+            new_trick = Tricks(trick_name=form.trick_name.data, fk_boarder_id=form.fk_boarder_id.data)
+            db.session.add(new_trick)
+            db.session.commit()
+            return redirect(url_for("home"))
+    return render_template("add_trick.html", title="Add trick", form=form)
+
 
 @app.route('/trick_update/<new_name>')
 def trick_update(new_name):
@@ -69,12 +76,14 @@ def trick_update(new_name):
     db.session.commit()
     return f"You have changed the name of the most rescent trick to {new_name}"
 
+
 @app.route('/trick_delete/<int:id>')
 def trick_delete(id):
     trick_delete = Tricks.query.filter_by(trick_id=id).first()
     db.session.delete(trick_delete)
     db.session.commit()
     return f"Trick {id} has been deleted"
+
 
 @app.route('/assign_trick_to_owner/<int:id>')
 def assign_trick_to_owner(id):
