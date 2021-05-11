@@ -69,12 +69,15 @@ def trick_create():
     return render_template("add_trick.html", title="Add trick", form=form)
 
 
-@app.route('/trick_update/<new_name>')
-def trick_update(new_name):
-    trick_name_change = Tricks.query.order_by(Tricks.trick_id.desc()).first()
-    trick_name_change.trick_name = new_name
-    db.session.commit()
-    return f"You have changed the name of the most rescent trick to {new_name}"
+@app.route('/trick_update/<int:id>', methods=["GET", "POST"])
+def trick_update(id):
+    form = TrickForm()
+    trick_name_change = Tricks.query.filter_by(trick_id = id).first()
+    if request.method == "POST":
+        trick_name_change.trick_name = form.trick_name.data
+        db.session.commit()
+        return redirect(url_for("home"))
+    return render_template("update_trick.html", form=form, title="Update trick", trick=trick_name_change)
 
 
 @app.route('/trick_delete/<int:id>')

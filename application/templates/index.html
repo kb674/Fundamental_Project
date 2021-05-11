@@ -9,6 +9,9 @@
     {% for a_trick in a_boarder.tricks %}
         {{ a_trick.trick_name }}
         <br>
+        <form action="{{ url_for('trick_update', id =a_trick.trick_id) }}">
+            <input type=submit value="Change">
+        </form>
         <br>
     {% endfor %}
     <br>

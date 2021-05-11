@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% block body %}
+<br><br>
+Original Trick: {{ trick.trick_name }}
+<form action='' method='POST'>
+    {{ form.hidden_tag() }}
+    {{ form.trick_name.label }} {{ form.trick_name}}<br>
+    {{ form.submit }}
+</form>
+{% endblock body %}
