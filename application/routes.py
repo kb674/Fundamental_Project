@@ -31,19 +31,22 @@ def create():
     return render_template("add_boarder.html", title="Add boarder",form=form)
     
 
-@app.route('/update/<new_name>')
-def update(new_name):
-    boarder_name_change = Boarders.query.order_by(Boarders.boarder_id.desc()).first()
-    boarder_name_change.boarder_name = new_name
-    db.session.commit()
-    return f"You have changed the name of the boarder to {new_name}"
+@app.route('/update/<int:id>', methods=["GET","POST"])
+def update(id):
+    form = TaskForm()
+    boarder_name_change = Boarders.query.filter_by(boarder_id = id).first()
+    if request.method == "POST":
+        boarder_name_change.boarder_name = form.boarder_name.data
+        db.session.commit()
+        return redirect(url_for("home"))
+    return render_template("update_boarder.html", form=form, title="Update boarder", boarder=boarder_name_change)
 
-@app.route('/delete/<int:id>')
+@app.route('/delete/<int:id>', methods=["GET","POST"])
 def delete(id):
     boarder_delete = Boarders.query.filter_by(boarder_id=id).first()
     db.session.delete(boarder_delete)
     db.session.commit()
-    return f"Boarder {id} has been deleted"
+    return redirect(url_for("home"))
 
 
 
