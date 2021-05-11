@@ -1,6 +1,7 @@
 from application import app, db
 from application.models import Task_table, Boarders, Tricks
-from flask import render_template
+from application.forms import TaskForm
+from flask import render_template, request, redirect, url_for
 
 @app.route('/')
 
@@ -18,12 +19,17 @@ def boarder_view():
         output += str(each_boarder.boarder_id) + " |    "+ each_boarder.boarder_name + "<br>"
     return output
 
-@app.route('/create')
+@app.route('/create', methods=["GET", "POST"])
 def create():
-    new_boarder = Boarders(boarder_name = 'skate_master_5000')
-    db.session.add(new_boarder)
-    db.session.commit()
-    return f"A new boarder has been added"
+    form = TaskForm()
+    if request.method == "POST":
+        if form.validate_on_submit():
+            new_boarder = Boarders(boarder_name=form.boarder_name.data)
+            db.session.add(new_boarder)
+            db.session.commit()
+            return redirect(url_for("home"))
+    return render_template("add_boarder.html", title="Add boarder",form=form)
+    
 
 @app.route('/update/<new_name>')
 def update(new_name):
