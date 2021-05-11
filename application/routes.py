@@ -62,3 +62,10 @@ def trick_delete(id):
     db.session.delete(trick_delete)
     db.session.commit()
     return f"Trick {id} has been deleted"
+
+@app.route('/assign_trick_to_owner/<int:id>')
+def assign_trick_to_owner(id):
+    trick_assign = Tricks.query.filter_by(trick_id=id).first()
+    trick_assign.fk_boarder_id = 1
+    db.session.commit()
+    return f"Trick {id} has been assigned to boarder {trick_assign.fk_boarder_id}"
