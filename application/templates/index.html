@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<h2>Boarders and Tricks</h2>
+{% for a_boarder in all_boarders %}
+    <h3>
+        {{ a_boarder.boarder_name }}  |{{ a_boarder.boarder_id }}| 
+        <form action="{{ url_for('update', id =a_boarder.boarder_id) }}"><input type=submit value="Change Name"> </form> 
+        <form action="{{ url_for('delete', id =a_boarder.boarder_id) }}"><input type=submit value="Delete Boarder"> </form>  
+    </h3>
+    <br>
+    {% for a_trick in a_boarder.tricks %}
+        {{ a_trick.trick_name }}
+        <br>
+        <form action="{{ url_for('trick_update', id =a_trick.trick_id) }}">
+            <input type=submit value="Change">
+        </form>
+        
+        <form action="{{ url_for('trick_delete', id=a_trick.trick_id) }}">
+            <input type=submit value="Delete">
+        </form>
+        <br>
+    {% endfor %}
+    <br>
+    <br>
+{% endfor %}
+
+
+{% endblock body %}
