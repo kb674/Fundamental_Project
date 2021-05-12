@@ -62,6 +62,33 @@ class TestViews(TestBase):
        response = self.client.get(url_for('trick_update', id=1), follow_redirects=True)
        self.assertEqual(response.status_code, 200)
 
-  
+class TestRead(TestBase):
+    def test_read_tasks(self):
+        response = self.client.get(url_for("home"))
+        self.assertIn(b"master_skater_1000",response.data) 
+
+class TestCreate(TestBase):
+    def test_create_boarder(self):
+        reponse = self.client.post(url_for("create"), 
+            data=dict(boarder_name="master_skater_2000"),
+            follow_redirects=True)
+        self.assertIn(b"master_skater_2000", reponse.data)
+
+class TestUpdate(TestBase):
+    def test_update_boarder(self):
+        reponse = self.client.post(url_for("update", id=1), 
+            data=dict(boarder_name="master_boarder_3000"),
+            follow_redirects=True)
+        self.assertIn(b"master_boarder_3000", reponse.data)
+
+class TestDelete(TestBase):
+    def test_delete_boarder(self):
+        reponse = self.client.get(url_for("delete", id=1), 
+            follow_redirects=True)
+        self.assertNotIn(b"master_skater_1000", reponse.data)
+
+
+    
+
     
     

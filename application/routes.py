@@ -1,5 +1,5 @@
 from application import app, db
-from application.models import Task_table, Boarders, Tricks
+from application.models import Boarders, Tricks
 from application.forms import TaskForm, TrickForm
 from flask import render_template, request, redirect, url_for
 
