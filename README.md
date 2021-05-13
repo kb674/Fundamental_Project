@@ -6,7 +6,7 @@ This read.me documents the process from app idea to deployement for my fundament
 
 # Brief
 The aim for this project is to create a CRUD application.
-The projects requirements are:
+The project requirements are:
 
 * Follow an AGILE workflow and use a kanban board. *(Trello board)*
 
@@ -18,9 +18,9 @@ The projects requirements are:
 * Deploy to a cloud-based VM. *(GCP)*
 
 # App Idea
-_What is my idea?_  My idea for the application is a 'Tricktionary' app. The app will allow users to create a list of skate tricks for themselves and others.
+My idea for the application is a 'Tricktionary' app. The app will allow users to create a list of skate tricks for themselves and others.
 
-_Explain how the crud functionality works_ The app CRUD functionality can be described in the following user stories:
+The app's CRUD functionality can be described in the following user stories:
 * As a user I want to __create__ a boarder (skateboarder/longboarder) and assign tricks to this boarder.
 * As a user I want to **create** a list of tricks.
 * As a user I want to __read__ my list of tricks.
@@ -32,7 +32,7 @@ _Explain how the crud functionality works_ The app CRUD functionality can be des
 
 
 
-_What were my old ideas?_ My previous ideas for the application were also skate related. The ERDs of these ideas can be seen in (link location). 
+My previous ideas for the application were also skate related. The ERDs of these ideas can be seen in the documentation folder 
 After getting feedback and reflection I modified these ideas so that they would have clearer CRUD functionality and a one to many relationship between two tables. This made my final idea better suited for the brief.
 
 
