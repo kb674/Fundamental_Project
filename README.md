@@ -41,7 +41,7 @@ After getting feedback and reflection I modified these ideas so that they would 
 ## Database Design (ERD)
 The database has two tables: **Tricks** and **Boarders** which have a one to many relationship.
 
-![ERD](/documentation/ERD-used.png)
+![ERD](documentation/ERD - used.png)
 
 The boarders table has two columns: the boarder_id which is the primary key and boarder_name. This table stores the name of the boarder and gives it a id.
 
