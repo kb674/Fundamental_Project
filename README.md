@@ -32,7 +32,7 @@ The app's CRUD functionality can be described in the following user stories:
 
 
 
-My previous ideas for the application were also skate related. The ERDs of these ideas can be seen in the documentation folder 
+My previous ideas for the application were also skate related. The ERDs of these ideas can be seen in the documentation folder. (/documention/ERD)
 After getting feedback and reflection I modified these ideas so that they would have clearer CRUD functionality and a one to many relationship between two tables. This made my final idea better suited for the brief.
 
 
@@ -43,12 +43,13 @@ The database has two tables: **Tricks** and **Boarders** which have a one to man
 
 ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/ERD%20-%20used.png)
 
-The boarders table has two columns: the boarder_id which is the primary key and boarder_name. This table stores the name of the boarder and gives it a id.
+The boarders table has two columns: the boarder_id which is the primary key and the boarder_name. This table stores the name of a boarder and gives it an id.
 
-The tricks table has three columns: the trick_id which is the primary key, trick_name and fk_boarder_id. The fk_boarder is a foriegn key and is what establishes the one to many relationship. A boarder can have many tricks while a trick can only have one boarder.
+The tricks table has three columns: the trick_id which is the primary key, trick_name and fk_boarder_id. The fk_boarder_id is a foriegn key and is what establishes the one to many relationship. A boarder can have many tricks while a trick can only have one boarder.
 
 ## CI Pipeline
-(Show the CI pipeline diagram.)
+![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/ci%20pipeline.png)
+
 * Kanban Board - For my project I have used a Trello Board as it makes it easy to visualise all the tasks needed ot be done for the whole project and the sprint. MOSCOW prioritisation can easily be assigned so tasks which MUST be done can be clearly seen.
 
 * Version Control System - Git is used as the version control system for this project with github being the host of this repository. Git is chosen becuase it makes it easy to track changes in my application over time. It has also allowed me to work on certain tasks at a time, assigning each of these tasks a new branch, following the main>dev>feature workflow
