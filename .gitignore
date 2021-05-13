@@ -128,5 +128,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# in application - test.db
-test.db
+# test.db
+application/test.db
