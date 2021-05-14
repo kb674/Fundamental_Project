@@ -1,8 +1,10 @@
 
-# DEVOP CORE FUNDAMENTAL PROJECT
-Started 18th April - DevOps Core Fundamental Project - Deadline 17th May
+# DEVOPS CORE FUNDAMENTAL PROJECT
+Started 18th April
 
-This read.me documents the process from app idea to deployement for my fundamental project.
+Deadline 17th May
+
+This read.me documents the process of creating my 'Tricktionary' application for my fundamental project.
 
 # Brief
 The aim for this project is to create a CRUD application.
@@ -11,87 +13,114 @@ The project requirements are:
 * Follow an AGILE workflow and use a kanban board. *(Trello board)*
 
 * Use a relational database with atleast two tables. *(MYSQL)*
-* Produce a functional CRUD application and front_end website. *(Python and Flask)*
+* Produce a functional CRUD application and front end website. *(Python and Flask)*
 * Carry out and document unit and integration tests. *(Pytest and Selenium)*
 * Use a VCS. *(Git and Github)*
 * Use a CI Sever. *(Jenkins)*
 * Deploy to a cloud-based VM. *(GCP)*
 
 # App Idea
-My idea for the application is a 'Tricktionary' app. The app will allow users to create a list of skate tricks for themselves and others.
+My idea for the application is a 'Tricktionary' app. The app will allow users to create a list of skate tricks for themselves or others.
 
-The app's CRUD functionality can be described in the following user stories:
-* As a user I want to __create__ a boarder (skateboarder/longboarder) and assign tricks to this boarder.
+The app's CRUD functionality can be described using the following user stories:
+* As a user I want to __create__ a boarder (skateboarder/longboarder) and assign them skate tricks.
 * As a user I want to **create** a list of tricks.
 * As a user I want to __read__ my list of tricks.
 * As a user I want to **update** the name of a trick.
 * As a user I want to __delete__ a trick.
-* As a user I want to be able to __create__ new boarders.
-* As a user I want to be able to __update__ the name of boarders.
-* As a user I want to be able to __delete__ boarders.
-
-
+* As a user I want to be able to __create__  a new boarder.
+* As a user I want to be able to __update__ the name of a boarder.
+* As a user I want to be able to __delete__ a boarder.
 
 My previous ideas for the application were also skate related. The ERDs of these ideas can be seen in the documentation folder. (/documention/ERD)
-After getting feedback and reflection I modified these ideas so that they would have clearer CRUD functionality and a one to many relationship between two tables. This made my final idea better suited for the brief.
+After reflecting on some feedback, I modified these ideas to have a clearer CRUD functionality and a one to many relationship between two tables. This made my final idea better suited for the brief.
 
 
-# App Design
+# Database Design 
+![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/ERD%20-%20used.png)
 
-## Database Design (ERD)
+
 The database has two tables: **Tricks** and **Boarders** which have a one to many relationship.
 
-![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/ERD%20-%20used.png)
+
 
 The boarders table has two columns: the boarder_id which is the primary key and the boarder_name. This table stores the name of a boarder and gives it an id.
 
 The tricks table has three columns: the trick_id which is the primary key, trick_name and fk_boarder_id. The fk_boarder_id is a foriegn key and is what establishes the one to many relationship. A boarder can have many tricks while a trick can only have one boarder.
 
-## CI Pipeline
+# CI Pipeline
 ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/ci%20pipeline.png)
 
-* Kanban Board - For my project I have used a Trello Board as it makes it easy to visualise all the tasks needed ot be done for the whole project and the sprint. MOSCOW prioritisation can easily be assigned so tasks which MUST be done can be clearly seen.
+* Kanban Board - For my project I am using a Trello Board to easily visualise all the tasks needed to be done for the whole project and for each sprint. Additionally, MOSCOW prioritisation can be clearly assigned so tasks which MUST be done are easily seen.
 
-* Version Control System - Git is used as the version control system for this project with github being the host of this repository. Git is chosen becuase it makes it easy to track changes in my application over time. It has also allowed me to work on certain tasks at a time, assigning each of these tasks a new branch, following the main>dev>feature workflow
+* Version Control System - Git is used as the version control system for this project with github being the host for this repository. Git is chosen becuase it makes it easy to track changes in my application over time. It has also allowed me to work on certain tasks at a time, assigning each of these tasks a new branch, following the main>dev>feature workflow.
 
-* Developement Environment - Python and the microframework Flask has been used to develop the application and the front end website. Flask is chosen as it is lightweight but contains all the core features needed to implement CRUD functionality.
+* Developement Environment - Python and the microframework Flask are used to develop the application and the front end website. Flask is chosen as it is lightweight but contains all the core features needed to implement CRUD functionality.
 
-* CI Server - Jenkins has been used in this project to automatically run tests whenever a push is made to the main branch of this repository via a webhook. Jenkins will run the script in test.sh and produce test reports.
+* CI Server - Jenkins is used in this project to automatically run tests whenever a push is made to the main branch of this repository via a webhook. Jenkins will run the script 'test.sh' and produce test reports.
 
 * Testing - Pytest and Selenium are used for unit and intergration testing respectively.
 
 * Cloud Server - GCP is used to host the application on a virtual machine. 
 
-
-# Project Management
-## Kanban Board Walkthrough and Link
-![](https://trello.com/b/CJe8Yb4T/01fundamentalproject)
-My trello board has a product backlog and a sprint backlog for each sprint, a review and complete backlog. 
-Screenshots of the board at the beggining and at the end of the project are shown below.
-![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Sprint1%20-%201.png)
-![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Sprint5%20-%20end.png)
-Screenshots after each sprint can be founds in the documents folder. (Screenshots will start with sprint and trello)
-
-
-
-## Sprints breakdown
+# Agile Worflow
 For the actual project week I simulated each day as a whole sprint. For each 'sprint' I carried out the following tasks: 
-*Sprint_one = Basic CRUD functionality
+* Day one/Sprint_one = Basic CRUD functionality
+* Day two/Sprint_two = User_input and forms
+* Day three/Sprint_three = Unit and Intergration tests
+* Day four/Sprint_four = Jenkins and automation
+* Day five/Sprint_five = Supporting documentation
 
-*![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Trello%20-%20User%20Stories%201.png)
+Adding onto this, I created a new git branch for each sprint following the main-dev-feature workflow. At the end of the day, when I had completed my tasks I created a pull request and merged the changes from the sprint branch to the dev branch. Finally on the last day, I merged the dev and main branches.
 
-*Sprint_two = User_input and forms
+The corresponding tasks which I completed in each sprint can be seen in my trello board (link) or the daily screenshots can be found in documentaion folder/sprint. The screenshots of my trello board at the start and end of the projects are shown below in addition to the user stories and testing tasks.
+![Project start](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Sprint1%20-%201.png)
+![Project end](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Sprint5%20-%20end.png)
+![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Trello%20-%20User%20Stories%201.png)
+![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Trello%20-%20User%20Stories%202.png)
+![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Trello%20-%20Testing%20checklist.png)
 
-*![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Trello%20-%20User%20Stories%202.png)
+# The application 
+The current version of the application acts as the minimal viable product and includes create, read, update and delete functionality.
 
-*Sprint_three = Unit and intergration testing
+* When navigating to the home page the user will see an emty page with three headers: Home, Add a Boarder and Add a Trick.
+* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%201.png)
 
-*![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Trello%20-%20Testing%20checklist.png)
+* The user can click on 'add a boarder' and be taken to the /create page. Here the user can enter the name of the boarder.
+* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%202.png)
 
-*Sprint_four = Automation
+* A new boarders has been added. (Can see their name and ID number)
+* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%203.png)
 
-*Sprint five = Documentation
+* The user can also add a trick by clicking on the Add a Trick button. This will take them to the /trick_create page. The user can then specify the trick and the boarder ID number.
+* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%204.png)
 
+* The user has added a trick.
+* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%205.png)
+
+* By clicking on change name, the name of the boarder can be changed.
+* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%206.png)
+
+* The user has changed the name of the boarder.
+* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%207.png)
+
+* The user can change the name of a trick by clicking the change button found under atrick.
+* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%208.png)
+
+* The trick has been updated.
+* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%209.png)
+
+* Finally, the user can delete a trick by clicking the delete button below the trick.
+* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%2010.png)
+
+* The user can also delete a boarder in a similar manner.
+* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%2011.png)
+
+# Current Errors and Future Implementations
+As I aimed to build the minimal viable product by the end of the week, this app still contains some errors. If I could continue to work on this project here are the errors and which I would resolve first and features I would improve on:
+* When adding a new trick if the user inputs the wrong id this will lead to an error. To resolve this I would implement a select field where instead of inputting an id the user can choose from a list of boarders which exist.
+* When changing the name of a boarder, the submit button still reads 'add a boarder'. I want to change this to change name or something similar.
+* Overall I would improve the functionality of the app further by making the user a boarder. Then there will a button under the boarder where the user can add a trick. I think this would make the functionality more smoother and intuitive to use for the user.
 
 # App Developement and Testing
 
@@ -167,39 +196,7 @@ class TestAdd_trick_enter_name(TestBase):
 The results of the tests.
 ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/pytest%20-%20integration%20results.png)
 
-## The application front-end
-* When navigating to the home page the user will see an emty page with three headers: Home, Add a Boarder and Add a Trick.
-* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%201.png)
 
-* The user can click on 'add a boarder' and be taken to the /create page. Here the user can enter the name of the boarder.
-* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%202.png)
-
-* Here you can see the new boarders name and their ID number.
-* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%203.png)
-
-* The user can also add a trick by clicking on the Add a Trick button. This will take them to the /trick_create page. Here the user specify the trick and the boarder ID number.
-* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%204.png)
-
-* The user has added a trick.
-* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%205.png)
-
-* By clicking on change name, the user can update the name of the boarder. 
-* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%206.png)
-
-* The user has changed the name of the boarder.
-* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%207.png)
-
-* The user can change the name of a trick by clicking the change button under the trick.
-* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%208.png)
-
-* The trick has been updated.
-* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%209.png)
-
-* Finally, the user can delete a trick by clicking the delete button below the trick.
-* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%2010.png)
-
-* The user can also delete a boarder in a similar manner.
-* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%2011.png)
 
 
 ## Jenkins and auaotmation
