@@ -65,11 +65,11 @@ The tricks table has three columns: the trick_id which is the primary key, trick
 
 # Project Management
 ## Kanban Board Walkthrough and Link
-[](https://trello.com/b/CJe8Yb4T/01fundamentalproject)
+![](https://trello.com/b/CJe8Yb4T/01fundamentalproject)
 My trello board has a product backlog and a sprint backlog for each sprint, a review and complete backlog. 
 Screenshots of the board at the beggining and at the end of the project are shown below.
-[](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Sprint1%20-%201.png)
-[](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Sprint5%20-%20end.png)
+![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Sprint1%20-%201.png)
+![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Sprint5%20-%20end.png)
 Screenshots after each sprint can be founds in the documents folder. (Screenshots will start with sprint and trello)
 
 
@@ -77,8 +77,11 @@ Screenshots after each sprint can be founds in the documents folder. (Screenshot
 ## Sprints breakdown
 For the actual project week I simulated each day as a whole sprint. For each 'sprint' I carried out the following tasks: 
 * Sprint_one = Basic CRUD functionality
+* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Trello%20-%20User%20Stories%201.png)
 * Sprint_two = User_input and forms
+* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Trello%20-%20User%20Stories%202.png)
 * Sprint_three = Unit and intergration testing
+* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Trello%20-%20Testing%20checklist.png)
 * Sprint_four = Automation
 * Sprint five = Documentation
 ## Backlog breakdown - user stories
