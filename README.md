@@ -76,21 +76,28 @@ Screenshots after each sprint can be founds in the documents folder. (Screenshot
 
 ## Sprints breakdown
 For the actual project week I simulated each day as a whole sprint. For each 'sprint' I carried out the following tasks: 
-* Sprint_one = Basic CRUD functionality
-![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Trello%20-%20User%20Stories%201.png)
+*Sprint_one = Basic CRUD functionality
 
-* Sprint_two = User_input and forms
-![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Trello%20-%20User%20Stories%202.png)
-* Sprint_three = Unit and intergration testing
-![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Trello%20-%20Testing%20checklist.png)
-* Sprint_four = Automation
-* Sprint five = Documentation
+*![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Trello%20-%20User%20Stories%201.png)
+
+*Sprint_two = User_input and forms
+
+*![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Trello%20-%20User%20Stories%202.png)
+
+*Sprint_three = Unit and intergration testing
+
+*![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Trello%20-%20Testing%20checklist.png)
+
+*Sprint_four = Automation
+
+*Sprint five = Documentation
+
 
 # App Developement and Testing
 
 ## App Testing Design and Summary of overall Results, reflection
-
-Pytest is used for unit testing. Unit tests are written to test each function in the app by asserting whether the ouput will be a certain value. For my unit tests I have aimed to test all the CRUD functionality in regards to 'boarders', I.E adding, deleting and updating the boarders. My unit tests can be seen below.
+Testing is used to find the errors in the code before the final application is deployed to end users. There are many categories of testing including: non-functional, functional and maintence testing. For this project, two types of functional tests are required to be carried out, unit tests and intergration tests.
+Pytest is used for the unit testing. Unit tests are written to test each function in the app by asserting whether the ouput will be a certain value. For my unit tests I have aimed to test all the CRUD functionality in regards to 'boarders', I.E adding, deleting and updating the boarders. My unit tests can be seen below.
 ```
 class TestRead(TestBase):
     def test_read_tasks(self):
@@ -118,41 +125,125 @@ class TestDelete(TestBase):
         self.assertNotIn(b"master_skater_1000", reponse.data)
         
 ```
+The results for these tests are shown below in addition to a coverage report.
+![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/pytest%20-%20coverage%20results.png)
+While the results produce a coverage of 82%, this only means that 82% of lines were covered. As my application is currently the MVP (minimal viable product) it still has some errors.
 
+Intergration testing is used to see how all sections of the application from front end to back end work together. For this, selenium is used. My tests have been designed to test what happens when a user clicks on the 'add boarder' and 'add trick' buttons. Additionally I have also written tests for when the user enters a boarder name and trick name. 
 
+````
+class TestAdd(TestBase):
+    def add_boarder_button(self):
+        button = self.driver.find_element_by_xpath('/html/body/a[2]')
+        button.click()
+        self.assertEqual(urlfor("create"))
 
-written all the CRUD functionality in regards to boarders, (i.e adding, deleting, updating)
-The covergae for the unit tests are 84%.
-In my next sprint I would like to write unit tests which cover the crud functionality for tricks.
-Screenshot of results.
-What were the results, coverage.
+class TestAdd_trick(TestBase):
+    def add_boarder_trick(self):
+        button = self.driver.find_element_by_xpath('/html/body/a[3]')
+        button.click()
+        self.assertEqual(urlfor("trick_create"))
 
-Intergration testing is used to see how well the backend front end and database work together. 
-Selenium is used for intergration testing. I wrote four tests which test the buttons: add a boarder, add a trick. The results can be seen here.
+class TestAdd_board_enter_name(TestBase):
+    def add_boarder_enter_name(self):
+        button = self.driver.find_element_by_xpath('/html/body/a[2]')
+        button.click()
+        field = self.driver.find_element_by_xpath('//*[@id="boarder_name"]')
+        field = field.send_keys("skate_master_2121")
+        self.assertIn(url_for('home'), field)
 
-When the user navigates to the home page there are three headings: home, add boarder and add trick. The use can then add a boarder, be navigated to another page where they can add a boarder name. They will then be naviagted to the home page again. Here, after taking note of the boarder id the user can click add trick, taken to add the add trick page and add a trick and specify a board number.
+class TestAdd_trick_enter_name(TestBase):
+    def add_trick_enter_name(self):
+        button = self.driver.find_element_by_xpath('/html/body/a[2]')
+        button.click()
+        field1 = self.driver.find_element_by_xpath('//*[@id="trick_name"]')
+        field1 = field1.send_keys("skate_master_2121")
+        field2 = self.driver.find_element_by_xpath('//*[@id="fk_boarder_id"]')
+        field2 = field2.send_keys('1')
+        self.assertIn(url_for('home'), field1)
+        self.assertIn(url_for('home'), field2)
+````
+
+The results of the tests.
+![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/pytest%20-%20integration%20results.png)
+
+## The application front-end
+* When navigating to the home page the user will see an emty page with three headers: Home, Add a Boarder and Add a Trick.
+* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%201.png)
+
+* The user can click on 'add a boarder' and be taken to the /create page. Here the user can enter the name of the boarder.
+* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%202.png)
+
+* Here you can see the new boarders name and their ID number.
+* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%203.png)
+
+* The user can also add a trick by clicking on the Add a Trick button. This will take them to the /trick_create page. Here the user specify the trick and the boarder ID number.
+* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%204.png)
+
+* The user has added a trick.
+* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%205.png)
+
+* By clicking on change name, the user can update the name of the boarder. 
+* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%206.png)
+
+* The user has changed the name of the boarder.
+* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%207.png)
+
+* The user can change the name of a trick by clicking the change button under the trick.
+* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%208.png)
+
+* The trick has been updated.
+* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%209.png)
+
+* Finally, the user can delete a trick by clicking the delete button below the trick.
+* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%2010.png)
+
+* The user can also delete a boarder in a similar manner.
+* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/front-end%2011.png)
 
 
 ## Jenkins and auaotmation
-Jenkins is an open source automation server which can be used as a CI server to build CI pipelines, as a build tool and deployement tool. 
+Jenkins is an open source automation server which can be used in CI pipelines as a CI server. For this project jenkins was used for its freestyle jobs, in particular to automatically carry testing when a push is made to the main branch of this repository. First, I set up the webhook for this repository. I then linked this repository to my jenkins job and checked the GitHub hook trigger for GITScm polling to finish setting up the webook on both end. 
 
-Jenkins was chosen for this project for its freestyle jobs. As the application is light the aim for jenkins is to just automate the testing. I set up a webhook in my github repository. In jenkins I set up a job where everytime there is a push to the main branch, jenkins will run the following script.
-The script will first install all dependencies.
-Then install python.
-Then create the environment
-Them run the tests.
-The tests can then be seen in the reports. 
+When writing my script (test.sh) I used the credentials plugin for jenkins to keep the database uri and secret key secret. My testing script has the following logic:
+First install the required tools for the job, i.e python, python virtual environments, python pip3 installer and the chromium browser for selenium to work.
+````
+sudo apt update
+sudo apt install python3
+sudo apt install python3-venv
+sudo apt install python3-pip
 
-The credential plugiin is used here to keep the secret key and databse uri hidden.
+sudo apt install chromium-browser -y
+````
+Following this the script will then run commands to create and activate the virtual environment followed by pip3 installing all the dependecies needed for testing.
+````
+python3 -m venv env
+source env/bin/activate
+pip3 install -r requirements.txt
+````
+Then the environment variables are exported.
+````
+export DATABASE_URI
+export SECRET_KEY
+````
 
-
+Finally, the tests are run which will produce coverage reports.
+````
+python3 -m pytest --doctest-modules --junitxml=junit/test-results.xml --cov=application --cov-report=xml --cov-report=html
+````
 
 # Risk Assessment
-A risk assessment has been carried out periodically throughout the project. Here is a link to all screenshots of assessments done. Throughout the project as we learned more about the tools and technologies used, I began to identify different risks and different methods to reduce and stop these risks which can be seen from the first assessment to the last. A good example is...
+First assessment
+
+A risk assessment has been carried out periodically throughout the project. Here is a link `to the final document. (Screenshots of the assessment throughout the project can be found in the documentation folder) Throughout the project as we learned more about the tools and technologies used, I began to identify different risks and different methods to reduce and stop these risks which can be seen from the first assessment to the last. A good example of this is learning about the importance of keeping database URIs and secret keys private. In the case of secret keys, these are used to stop CRSF attacks.
+
 
 The final assessment also has a review which states what actually happened. (Link risk assessment)
 
 # Reflection
-The project was a success in terms on delivering a MVP in terms of applicaiton, testing and automation tools required. Some points of success where the CRUD functionality and the use of jenkins to automate the test.
-
-Some features I want to implement next. If I had another week to work on this project I would add to the MVP by removing all errors such as if I too long work, give the wrong longboard id. This can be resolved by actually writing error messages into the code and changing to a select form.
+At the current stage of the project I have used all the tools specified in the brief and have developed an application (MVP) which has the main CRUD functionality. The testing has a ahchieved above 75% coverage and jenkins has been used to automate this testing. If i was to carry on in this project some implementations I would like to make next are:
+* Resolving the error which occurs when a user types in a trickname or boarder name which is too long. Print an error message with instructions on what to do next.
+* Resolve the error if the user does not enter the correct boarder ID number. Use a drop down form.
+*  Change the submit button the cupdate boarder when the user tries to update the boarders name. (can be seen below that the button says add a boarder)
+*  Once these changes are done I would write more comprehensive tests to achive a higher coverage.
+*  Overall I would write more thoroguh integration tests to make sure each button functonality is working like it should, something lacking at this point.
