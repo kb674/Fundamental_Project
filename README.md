@@ -116,11 +116,9 @@ The credential plugiin is used here to keep the secret key and databse uri hidde
 # Risk Assessment
 A risk assessment has been carried out periodically throughout the project. Here is a link to all screenshots of assessments done. Throughout the project as we learned more about the tools and technologies used, I began to identify different risks and different methods to reduce and stop these risks which can be seen from the first assessment to the last. A good example is...
 
-The final assessment also has a review which states what actually happened.
+The final assessment also has a review which states what actually happened. (Link risk assessment)
 
 # Reflection
 The project was a success in terms on delivering a MVP in terms of applicaiton, testing and automation tools required. Some points of success where the CRUD functionality and the use of jenkins to automate the test.
-
-Some points to improve on next time are: intergration testing. After seeing my results I realzied that my integration tests which seemed to have passed did not actually do what I intended at all and in this sense they have failed. Form this I have learnt the importance of checking the testing reports. 
 
 Some features I want to implement next. If I had another week to work on this project I would add to the MVP by removing all errors such as if I too long work, give the wrong longboard id. This can be resolved by actually writing error messages into the code and changing to a select form.
