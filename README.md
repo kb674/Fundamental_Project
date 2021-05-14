@@ -51,6 +51,8 @@ The tricks table has three columns: the trick_id which is the primary key, trick
 # CI Pipeline
 ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/ci%20pipeline.png)
 
+INTRODUCE THE TOPIC, WHAT IS A CI PIPELINE, ETC
+
 * Kanban Board - For my project I am using a Trello Board to easily visualise all the tasks needed to be done for the whole project and for each sprint. Additionally, MOSCOW prioritisation can be clearly assigned so tasks which MUST be done are easily seen.
 
 * Version Control System - Git is used as the version control system for this project with github being the host for this repository. Git is chosen becuase it makes it easy to track changes in my application over time. It has also allowed me to work on certain tasks at a time, assigning each of these tasks a new branch, following the main>dev>feature workflow.
