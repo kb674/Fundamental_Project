@@ -77,25 +77,51 @@ Screenshots after each sprint can be founds in the documents folder. (Screenshot
 ## Sprints breakdown
 For the actual project week I simulated each day as a whole sprint. For each 'sprint' I carried out the following tasks: 
 * Sprint_one = Basic CRUD functionality
-* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Trello%20-%20User%20Stories%201.png)
+![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Trello%20-%20User%20Stories%201.png)
+
 * Sprint_two = User_input and forms
-* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Trello%20-%20User%20Stories%202.png)
+![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Trello%20-%20User%20Stories%202.png)
 * Sprint_three = Unit and intergration testing
-* ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Trello%20-%20Testing%20checklist.png)
+![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Trello%20-%20Testing%20checklist.png)
 * Sprint_four = Automation
 * Sprint five = Documentation
-## Backlog breakdown - user stories
-The specific user stories and tasks can be seen here: link the photos
 
 # App Developement and Testing
-## Flask
-
-Explain how the basic crud functionality of the app has been achieved through routes.
-Screenshots of the front end.
 
 ## App Testing Design and Summary of overall Results, reflection
-Screenshot of unit tests.
-Pytest is used for unit testing. The unit tests have been written to test each function in the app. The tests assert whether the ouput will be a certain value. For my unit tests I have testing all the CRUD functionality in regards to boarders. (i.e adding, deleting, updating)
+
+Pytest is used for unit testing. Unit tests are written to test each function in the app by asserting whether the ouput will be a certain value. For my unit tests I have aimed to test all the CRUD functionality in regards to 'boarders', I.E adding, deleting and updating the boarders. My unit tests can be seen below.
+```
+class TestRead(TestBase):
+    def test_read_tasks(self):
+        response = self.client.get(url_for("home"))
+        self.assertIn(b"master_skater_1000",response.data) 
+
+class TestCreate(TestBase):
+    def test_create_boarder(self):
+        reponse = self.client.post(url_for("create"), 
+            data=dict(boarder_name="master_skater_2000"),
+            follow_redirects=True)
+        self.assertIn(b"master_skater_2000", reponse.data)
+
+class TestUpdate(TestBase):
+    def test_update_boarder(self):
+        reponse = self.client.post(url_for("update", id=1), 
+            data=dict(boarder_name="master_boarder_3000"),
+            follow_redirects=True)
+        self.assertIn(b"master_boarder_3000", reponse.data)
+
+class TestDelete(TestBase):
+    def test_delete_boarder(self):
+        reponse = self.client.get(url_for("delete", id=1), 
+            follow_redirects=True)
+        self.assertNotIn(b"master_skater_1000", reponse.data)
+        
+```
+
+
+
+written all the CRUD functionality in regards to boarders, (i.e adding, deleting, updating)
 The covergae for the unit tests are 84%.
 In my next sprint I would like to write unit tests which cover the crud functionality for tricks.
 Screenshot of results.
