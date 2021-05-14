@@ -65,9 +65,14 @@ The tricks table has three columns: the trick_id which is the primary key, trick
 
 # Project Management
 ## Kanban Board Walkthrough and Link
-(Link to trello board)
+[](https://trello.com/b/CJe8Yb4T/01fundamentalproject)
 My trello board has a product backlog and a sprint backlog for each sprint, a review and complete backlog. 
-Screenshots of the board after each sprint can be found here showing which tasks I did in each 'sprint' and how the project was managed over time.
+Screenshots of the board at the beggining and at the end of the project are shown below.
+[](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Sprint1%20-%201.png)
+[](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Sprint5%20-%20end.png)
+Screenshots after each sprint can be founds in the documents folder. (Screenshots will start with sprint and trello)
+
+
 
 ## Sprints breakdown
 For the actual project week I simulated each day as a whole sprint. For each 'sprint' I carried out the following tasks: 
