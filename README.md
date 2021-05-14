@@ -54,9 +54,9 @@ The tricks table has three columns: the trick_id which is the primary key, trick
 
 * Version Control System - Git is used as the version control system for this project with github being the host of this repository. Git is chosen becuase it makes it easy to track changes in my application over time. It has also allowed me to work on certain tasks at a time, assigning each of these tasks a new branch, following the main>dev>feature workflow
 
-* Developement Environment - Python and the microframework Flask has been used to develop the application and the front end website. Flask is chosen as it is lightweight but contains all the core features needed to develope needed to develope my application.
+* Developement Environment - Python and the microframework Flask has been used to develop the application and the front end website. Flask is chosen as it is lightweight but contains all the core features needed to implement CRUD functionality.
 
-* CI Server - Jenkins has been used in this project to automatically poll the main build of the application from github and run tests on the application. 
+* CI Server - Jenkins has been used in this project to automatically run tests whenever a push is made to the main branch of this repository via a webhook. Jenkins will run the script in test.sh and produce test reports.
 
 * Testing - Pytest and Selenium are used for unit and intergration testing respectively.
 
@@ -67,10 +67,10 @@ The tricks table has three columns: the trick_id which is the primary key, trick
 ## Kanban Board Walkthrough and Link
 (Link to trello board)
 My trello board has a product backlog and a sprint backlog for each sprint, a review and complete backlog. 
-Screenshots of the board after each sprint can be found here. (link)
+Screenshots of the board after each sprint can be found here showing which tasks I did in each 'sprint' and how the project was managed over time.
 
 ## Sprints breakdown
-For the actual project week I simulated each day as a whole sprint. For each 'sprint' I carried out the tasks specified in the trello board which can be seen above.
+For the actual project week I simulated each day as a whole sprint. For each 'sprint' I carried out the following tasks: 
 * Sprint_one = Basic CRUD functionality
 * Sprint_two = User_input and forms
 * Sprint_three = Unit and intergration testing
