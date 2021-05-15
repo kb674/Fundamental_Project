@@ -124,57 +124,83 @@ As I aimed to build the minimal viable product by the end of the week, this app 
 * When changing the name of a boarder, the submit button still reads 'add a boarder'. I want to change this to change name or something similar.
 * Overall I would improve the functionality of the app further by making the user a boarder. Then there will a button under the boarder where the user can add a trick. I think this would make the functionality more smoother and intuitive to use for the user.
 
-# App Developement and Testing
+# Testing 
+Testing is the process of analysing the code to find defects. Functional testing aims to identify the functions the application is expected to perform and check whether the application actually carries these out. Both unit testing and intergration testing are types of functional tesing.
+Unit testing is used to test units of functionality (i.e functions) while intergration testing is used to test how all layers of the application (database layer, backend, frontend) work toegether.
 
-## App Testing Design and Summary of overall Results, reflection
-Testing is used to find the errors in the code before the final application is deployed to end users. There are many categories of testing including: non-functional, functional and maintence testing. For this project, two types of functional tests are required to be carried out, unit tests and intergration tests.
-Pytest is used for the unit testing. Unit tests are written to test each function in the app by asserting whether the ouput will be a certain value. For my unit tests I have aimed to test all the CRUD functionality in regards to 'boarders', I.E adding, deleting and updating the boarders. My unit tests can be seen below.
-```
+For my application I have currently written and carried out tests for read, create, update and delete functionality. The general structure of the unit tests assert whether an expected outcome occurs.
+
+In the setup of the unit test, I add a sample boarder to the test database, such that it SHOULD appear in the homepage.
+````
+ def setUp(self):
+        db.create_all()
+        test_boarder = Boarders(boarder_name = "master_skater_1000")
+
+        db.session.add(test_boarder)
+        db.session.commit()
+`````
+I then assert that 'master_skater_100' should appear on the home page to test for read functionality.
+````
 class TestRead(TestBase):
     def test_read_tasks(self):
         response = self.client.get(url_for("home"))
         self.assertIn(b"master_skater_1000",response.data) 
-
+        
+`````
+For create functionality, I add the boarder 'master_skate_2000' and assert that this boarder should appear on the homepage.
+````
 class TestCreate(TestBase):
     def test_create_boarder(self):
         reponse = self.client.post(url_for("create"), 
             data=dict(boarder_name="master_skater_2000"),
             follow_redirects=True)
         self.assertIn(b"master_skater_2000", reponse.data)
-
+`````
+The update function test, changes the name of the 'master_skater_1000' to 'master_skater_3000' and asserts that 'master_skater_3000' should appear on the homepage.
+````
 class TestUpdate(TestBase):
     def test_update_boarder(self):
         reponse = self.client.post(url_for("update", id=1), 
             data=dict(boarder_name="master_boarder_3000"),
             follow_redirects=True)
         self.assertIn(b"master_boarder_3000", reponse.data)
-
+`````
+Finally the delete functionality is tested by removing the boarder with the longboard_id of 1 and asserts that 'master_skater_1000' is **not** on the homepage.
+````
 class TestDelete(TestBase):
     def test_delete_boarder(self):
         reponse = self.client.get(url_for("delete", id=1), 
             follow_redirects=True)
-        self.assertNotIn(b"master_skater_1000", reponse.data)
-        
-```
+        self.assertNotIn(b"master_skater_1000", reponse.data)        
+`````
 The results for these tests are shown below in addition to a coverage report.
 ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/pytest%20-%20coverage%20results.png)
-While the results produce a coverage of 82%, this only means that 82% of lines were covered. As my application is currently the MVP (minimal viable product) it still has some errors.
 
-Intergration testing is used to see how all sections of the application from front end to back end work together. For this, selenium is used. My tests have been designed to test what happens when a user clicks on the 'add boarder' and 'add trick' buttons. Additionally I have also written tests for when the user enters a boarder name and trick name. 
+A positive of these results is that the tests achieve a coverage of 82% and tests the CRUD functionality works as it should. A negative is the functionality of adding, updating and deleting a trick is still not covered. If I was to continue the project, I would aim to test this 'trick' functionality by inserting a trick in the setup of the trick and making analogous assertions to what I have done for the boarders.
 
+While these tests are unit tests, they do show how the database layer and backend work together and in that context fall into the defintion of an intergration test. 
+
+Additionally, selenium has also been used to carry out more extensive intergration tests which aimed to test what happens when users click on buttons. In contrast to the unit tests, I have written these tests to also cover the functionaly which deals with the tricks. Selenium uses a webdrive which emulates clicking on submite buttons and writing test.
+
+This first test asserts that when you click on the 'Add a Boarder' button you will be taken the to /create page.
 ````
 class TestAdd(TestBase):
     def add_boarder_button(self):
         button = self.driver.find_element_by_xpath('/html/body/a[2]')
         button.click()
         self.assertEqual(urlfor("create"))
-
+````
+This test asserts that when you click on the 'Add a Trick' button you will be taken to the /trick_create page.
+````
 class TestAdd_trick(TestBase):
     def add_boarder_trick(self):
         button = self.driver.find_element_by_xpath('/html/body/a[3]')
         button.click()
         self.assertEqual(urlfor("trick_create"))
+````
+This test will click on 'Add a Boarder' and type in 'skate_master_2121'. The test then asserts that the user will then be taken to the home page.
 
+````
 class TestAdd_board_enter_name(TestBase):
     def add_boarder_enter_name(self):
         button = self.driver.find_element_by_xpath('/html/body/a[2]')
@@ -182,29 +208,46 @@ class TestAdd_board_enter_name(TestBase):
         field = self.driver.find_element_by_xpath('//*[@id="boarder_name"]')
         field = field.send_keys("skate_master_2121")
         self.assertIn(url_for('home'), field)
-
+ ````
+ This test clicks on the 'Add a Trick' button, then adds the trick 'shuv', and a the boarder id 1. The test then asserts that the user will be taken to the home page. 
+ ````
 class TestAdd_trick_enter_name(TestBase):
     def add_trick_enter_name(self):
         button = self.driver.find_element_by_xpath('/html/body/a[2]')
         button.click()
         field1 = self.driver.find_element_by_xpath('//*[@id="trick_name"]')
-        field1 = field1.send_keys("skate_master_2121")
+        field1 = field1.send_keys("shuv")
         field2 = self.driver.find_element_by_xpath('//*[@id="fk_boarder_id"]')
         field2 = field2.send_keys('1')
         self.assertIn(url_for('home'), field1)
         self.assertIn(url_for('home'), field2)
 ````
 
-The results of the tests.
+The results show four out four test have passed, not including the test base.
 ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/pytest%20-%20integration%20results.png)
 
+In order to run the selenium intergration tests, you will have to first install the chomium browser:
+````
+sudo apt install chromium-browser -y
+````
+Then install the webdriver with the following commands.
+````
 
+sudo apt install wget unzip -y
+version=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$(chromium-browser --version | grep -oP 'Chromium \K\d+'))
+wget https://chromedriver.storage.googleapis.com/${version}/chromedriver_linux64.zip
+sudo unzip chromedriver_linux64.zip -d /usr/bin
+rm chromedriver_linux64.zip
+````
+After the tests are written you can run the tests in the same way as unit tests by running pytest.
 
+# Automation
+Jenkins is an open source automation server which can be used in CI pipelines as a CI server. For this project jenkins was used for its freestyle jobs, in particular to automatically carry out testing and produce reports when a push is made to the main branch of this git repository. 
 
-## Jenkins and auaotmation
-Jenkins is an open source automation server which can be used in CI pipelines as a CI server. For this project jenkins was used for its freestyle jobs, in particular to automatically carry testing when a push is made to the main branch of this repository. First, I set up the webhook for this repository. I then linked this repository to my jenkins job and checked the GitHub hook trigger for GITScm polling to finish setting up the webook on both end. 
+The was setup by first creating a webhook in this repository. I then linked this repository to my jenkins job and checked the 'GitHub hook trigger for GITScm polling' option to finish setting up the webook on both ends. 
 
-When writing my script (test.sh) I used the credentials plugin for jenkins to keep the database uri and secret key secret. My testing script has the following logic:
+When writing my script (test.sh) I used the credentials plugin for jenkins to keep the database uri and secret key secret. 
+My testing script has the following logic:
 First install the required tools for the job, i.e python, python virtual environments, python pip3 installer and the chromium browser for selenium to work.
 ````
 sudo apt update
@@ -214,13 +257,13 @@ sudo apt install python3-pip
 
 sudo apt install chromium-browser -y
 ````
-Following this the script will then run commands to create and activate the virtual environment followed by pip3 installing all the dependecies needed for testing.
+Run the commands to create and activate the virtual environment followed by pip3 installing all the dependecies needed for testing.
 ````
 python3 -m venv env
 source env/bin/activate
 pip3 install -r requirements.txt
 ````
-Then the environment variables are exported.
+Then export the environment variables.
 ````
 export DATABASE_URI
 export SECRET_KEY
