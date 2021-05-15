@@ -275,17 +275,16 @@ python3 -m pytest --doctest-modules --junitxml=junit/test-results.xml --cov=appl
 ````
 
 # Risk Assessment
-First assessment
+(Link to risk_assessment_document)
+Here are screenshots of the risk assessment at the start and end of the project. Full screenshots of all five assessments taken throughout can be found in the documentation folder.
+![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/risk_assessment_1_start.png)
+![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/risk_assessment_4_final.png)
+A total of four risk assessments have been carried periodically during the project. As can be seen in the above screenshots, as I learnt more through the weeks my ability to 
+pickup on potential risks and think of effective reponses and control measures increased. A good example of this is the potential risk of Cross-Site-Request-Forgery attack. This 
+is a risk I never new at the beggining of the project, let alone knowing the control measures to decrease the likelehood of these attacks. By risk assessment 3, done at the 
+beggining of the final week of the project I was fully aware of this risk and knew that using environment variables and credential plugin in jenkins would minimise the risk of 
+uploading these to github which could lead to an attack.
 
-A risk assessment has been carried out periodically throughout the project. Here is a link `to the final document. (Screenshots of the assessment throughout the project can be found in the documentation folder) Throughout the project as we learned more about the tools and technologies used, I began to identify different risks and different methods to reduce and stop these risks which can be seen from the first assessment to the last. A good example of this is learning about the importance of keeping database URIs and secret keys private. In the case of secret keys, these are used to stop CRSF attacks.
+# Conclusion
+To conclude, this documentation has walked through the process of planning, developing and deploying my Trickionary application. An explanation of the design, front-end and testing has been given. As my app stands, it carries out all the basic CRUD functionality. Potential future implementation have been stated. 
 
-
-The final assessment also has a review which states what actually happened. (Link risk assessment)
-
-# Reflection
-At the current stage of the project I have used all the tools specified in the brief and have developed an application (MVP) which has the main CRUD functionality. The testing has a ahchieved above 75% coverage and jenkins has been used to automate this testing. If i was to carry on in this project some implementations I would like to make next are:
-* Resolving the error which occurs when a user types in a trickname or boarder name which is too long. Print an error message with instructions on what to do next.
-* Resolve the error if the user does not enter the correct boarder ID number. Use a drop down form.
-*  Change the submit button the cupdate boarder when the user tries to update the boarders name. (can be seen below that the button says add a boarder)
-*  Once these changes are done I would write more comprehensive tests to achive a higher coverage.
-*  Overall I would write more thoroguh integration tests to make sure each button functonality is working like it should, something lacking at this point.
