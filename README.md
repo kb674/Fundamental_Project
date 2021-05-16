@@ -33,7 +33,7 @@ The app's CRUD functionality can be described using the following user stories:
 * As a user I want to be able to __delete__ a boarder.
 
 My previous ideas for the application were also skate related. The ERDs of these ideas can be seen in the documentation folder (documention/ERD). 
-After reflecting on some feedback, I modified these ideas to have a clearer CRUD functionality and a one to many relationship between two tables. This made my final idea better suited for the brief.
+After reflecting on some feedback, I modified these ideas to have a clearer CRUD functionality and a one to many relationship between two tables. I ended up with my final idea which is better suited to the brief.
 
 
 # Database Design 
@@ -52,12 +52,12 @@ The tricks table has three columns: the trick_id which is the primary key, trick
 ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/ci%20pipeline.png)
 
 Contnious intergration allows for developers to create and add new code to a project frequently and quickly through the use of automation. For this project, the CI pipeline is relatively simple but still demonstrates the process of continous intergration. 
-The CI diagram above illustrates how the many components needed for this project can come together. In particular how a CI server can be used to automate the process of testing. 
+The CI diagram above illustrates how the many components needed for this project can come together. In particular how a CI server can be used to automate testing. 
 
 The components used in this project are:
 * Kanban Board - For my project I have used a Trello Board to easily visualise all the tasks needed to be done for the whole project and for each sprint.
 
-* Version Control System - Git is used as the version control system for this project with github being the host for this repository. Git is chosen becuase it makes it easy to track changes in my application over time. It has also allowed me to work on certain tasks at a time, assigning each of these tasks a new branch, following the main>dev>feature workflow.
+* Version Control System - Git is used as the version control system for this project with github being the host for this repository. Git is chosen becuase it makes it easy to track changes in my application over time. It has also allowed me to work on certain tasks at a time assigning each of these tasks a new branch, following the main>dev>feature workflow.
 
 * Developement Environment - Python and the microframework Flask have been used to develop the application and the front end website. Flask was chosen as it is lightweight but contains all the core features needed to implement CRUD functionality.
 
@@ -77,7 +77,7 @@ During project week I simulated each day as a whole sprint. For each 'sprint' I 
 
 Furthermore, I created a new git branch for each sprint working within a main-dev-feature workflow. At the end of the day when I had completed my tasks, I created a pull request and merged the changes from the sprint branch to the dev branch. Finally on the last day, I merged the dev and main branches.
 
-The corresponding tasks which I completed in each sprint can be seen in my trello board (link) or the daily screenshots found in the documentaion folder. The screenshots of my trello board at the start and end of the project are shown below, in addition to the user stories and testing tasks.
+The corresponding tasks which I completed in each sprint can be seen in my trello board ([LINK](https://trello.com/b/CJe8Yb4T)) or the daily screenshots found in the documentaion folder. The screenshots of my trello board at the start and end of the project are shown below, in addition to the user stories and testing tasks.
 ![Project start](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Sprint1%20-%201.png)
 ![Project end](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Sprint5%20-%20end.png)
 ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/Trello%20-%20User%20Stories%201.png)
@@ -122,12 +122,12 @@ The current version of the application acts as the minimal viable product and in
 
 # Current Errors and Future Implementations
 As I aimed to build the minimal viable product by the end of the week, this app still contains some errors. If I could continue to work on this project, here are the errors which I would resolve first and features I would implement:
-* When adding a new trick, if the user inputs the wrong id this will lead to an error. To resolve this I would implement a select field where instead of inputting an id the user can choose from a list of valid boarders so that no error can occur.
+* When adding a new trick, if the user inputs the wrong boarder id this will lead to an error. To resolve this I would implement a select field where instead of inputting an id the user can choose from a list of valid boarders so that no error can occur.
 * When changing the name of a boarder, the submit button still reads 'add a boarder'. I would want to change this to change name or something similar.
 * Overall I would improve the functionality of the app further by first only allowing the user to create a boarder on the homepage. Then a 'add a trick button' would appear direclty under the boarder. I think this would make the functionality more smoother and intuitive to use. This would also eliminate the first error discussed.
 
 # Testing 
-Testing is the process of analysing code to find defects. Functional testing aims to identify the functions the application is expected to perform and check whether the application actually carries these out. Both unit testing and intergration testing are types of functional tesing.
+Testing is the process of analysing code to find defects. Functional testing aims to identify the functions the application is expected to perform and check whether the application actually carries these out. Both unit testing and intergration testing are types of functional testing.
 Unit testing is used to test units of functionality (i.e functions) while intergration testing is used to test how all layers of the application (database layer, backend, frontend) work toegether.
 
 For my application I have currently written and carried out unit tests for read, create, update and delete functionality. The general structure of the unit tests assert whether an expected outcome occurs.
@@ -167,7 +167,7 @@ class TestUpdate(TestBase):
             follow_redirects=True)
         self.assertIn(b"master_boarder_3000", reponse.data)
 `````
-Finally the delete functionality is tested by removing the boarder with the longboard_id of 1 and asserts that 'master_skater_1000' will no longer be on the homepage.
+Finally the delete functionality is tested by removing the boarder with the longboard_id of 1 and asserting that 'master_skater_1000' will no longer be on the homepage.
 ````
 class TestDelete(TestBase):
     def test_delete_boarder(self):
@@ -183,7 +183,7 @@ On the other hand, the functionality of adding, updating and deleting a trick is
 
 While these tests are unit tests they do show how the database layer and backend work together, and in that context fall into the defintion of an intergration test. 
 
-For my actual integration tests however, I have used Selenium. These intergration tests are aimed to test what happens when users click on buttons. In contrast to the unit tests, I have written these tests to also cover the functionality which deals with tricks. Selenium uses a webdriver which emulates clicking on submit buttons and writing in forms.
+For my actual integration tests however, I have used Selenium. These intergration tests are aimed to see what happens when users click on buttons. In contrast to the unit tests, I have written these tests to also cover functionality which deals with 'tricks'. Selenium uses a webdriver which emulates clicking on submit buttons and writing in forms.
 
 This first test asserts that when you click on the 'Add a Boarder' button you will be taken the to the /create page.
 ````
@@ -272,25 +272,25 @@ export DATABASE_URI
 export SECRET_KEY
 ````
 
-Finally, the tests are run which will produce coverage reports.
+Finally, run the tests.
 ````
 python3 -m pytest --doctest-modules --junitxml=junit/test-results.xml --cov=application --cov-report=xml --cov-report=html
 ````
 
 # Risk Assessment
-(Link to risk_assessment_document)
+([LINK TO DOCUMENT](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/risk_assessment.md))
 ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/risk_assessment_1_start.png)
 ![](https://github.com/kb674/Fundamental_Project/blob/documentation/documentation/risk_assessment_4_final.png)
 
-A total of four risk assessments have been carried periodically during the project (These can been found in the documentation folder). The assessments carried out in the 
-beggining and end of the project are seen above. These demonstrate that as I learnt more throughout the weeks, my ability to pickup on potential risks and think of effective 
+A total of four risk assessments have been carried periodically during the project (Screenshots can been found in the documentation folder). The assessments carried out in the 
+beggining and end of the project can be seen above. These demonstrate that as I learnt more throughout the weeks my ability to pickup on potential risks and think of effective 
 reponses and control measures increased. A good example of this is the potential risk of a Cross-Site-Request-Forgery attack. This is a risk I never new at the beggining of the 
 project, let alone knowing the control measures. By risk assessment 3 which was carried out during the beggining of the last week of the project, I was fully aware of this risk 
 and knew that using environment variables and credential plugin in jenkins would minimise the chance of this attack occuring.
 
 # Conclusion
-To conclude, this documentation has walked through the process of planning, developing and deploying my Trickionary application. An explanation of the design, front-end and 
+To conclude, this documentation has walked through the process of planning, developing and testing my Trickionary application. An explanation of the database, front-end and 
 testing has been given. As my app stands, it carries out all the basic CRUD functionality and potential future implementations have been discussed. During the start of the 
 project I imagined my application to include users and accounts and in general be more complicated. However by the end of the project I have understood more about database 
-relationships and overall created a simpler application which successfully meets the brief.
+relationships and have created a simpler application which successfully meets the brief.
 
